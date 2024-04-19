@@ -24,3 +24,5 @@ The game is designed to be easy to understand and play, making it a great way to
 
 ## Class Diagram :
 
+![Class Diagram - Tic Tac Toe](https://github.com/SayantanD99/System-Design-TicTacToe/assets/32683338/6c1a8a61-0382-42b9-b9f1-aa37635b490a)
+
