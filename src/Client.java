@@ -2,7 +2,11 @@ import Controllers.GameController;
 import Exceptions.InvalidBotCountException;
 import Exceptions.InvalidMoveException;
 import Exceptions.InvalidNumberOfPlayersException;
-import Models.*;
+import Exceptions.SameSymbolException;
+import Models.Game;
+import Models.GameState;
+import Models.Player;
+import Models.Symbol;
 import Strategies.winningstrategy.ColWinningStrategy;
 import Strategies.winningstrategy.DiagonalRowWinningStrategy;
 import Strategies.winningstrategy.GameWinningStrategy;
@@ -12,7 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Client {
-    public static void main(String[] args) throws InvalidBotCountException, InvalidNumberOfPlayersException, InvalidMoveException {
+    public static void main(String[] args) throws InvalidBotCountException, InvalidNumberOfPlayersException, InvalidMoveException, SameSymbolException {
         GameController controller = new GameController();
         Scanner scanner = new Scanner(System.in);
 

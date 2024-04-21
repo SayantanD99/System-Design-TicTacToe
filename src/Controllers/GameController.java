@@ -3,6 +3,7 @@ package Controllers;
 import Exceptions.InvalidBotCountException;
 import Exceptions.InvalidMoveException;
 import Exceptions.InvalidNumberOfPlayersException;
+import Exceptions.SameSymbolException;
 import Models.Game;
 import Models.GameState;
 import Models.Player;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class GameController {
     //In the Controller class, we'll write all the methods which client needs from our System.
-    public Game startGame(int dimension, List<Player> players, List<GameWinningStrategy> winningStrategies) throws InvalidBotCountException, InvalidNumberOfPlayersException {
+    public Game startGame(int dimension, List<Player> players, List<GameWinningStrategy> winningStrategies) throws InvalidBotCountException, InvalidNumberOfPlayersException, SameSymbolException {
         return Game.getBuilder()
                 .setDimension(dimension)
                 .setPlayers(players)

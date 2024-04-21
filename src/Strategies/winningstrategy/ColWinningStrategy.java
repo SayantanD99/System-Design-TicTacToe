@@ -4,7 +4,6 @@ import Models.Board;
 import Models.Move;
 import Models.Symbol;
 
-import java.awt.dnd.DropTargetContext;
 import java.util.HashMap;
 import java.util.Map;
 

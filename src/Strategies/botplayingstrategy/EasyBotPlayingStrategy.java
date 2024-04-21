@@ -5,7 +5,6 @@ import Models.Cell;
 import Models.CellState;
 import Models.Move;
 
-import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class EasyBotPlayingStrategy implements BotPlayingStrategy {

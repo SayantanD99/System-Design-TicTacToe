@@ -1,21 +1,21 @@
 package Models;
 
-//import org.example.inheritance3.B;
 import Exceptions.InvalidBotCountException;
 import Exceptions.InvalidMoveException;
 import Exceptions.InvalidNumberOfPlayersException;
+import Exceptions.SameSymbolException;
 import Strategies.winningstrategy.GameWinningStrategy;
 
-import java.awt.image.CropImageFilter;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 public class Game {
     private List<Player> players;
     private Board board;
     private List<Move> moves;
-    private Player winnner;
+    private Player winner;
     private GameState gameState;
     private int nextMovePlayerIndex;
     private List<GameWinningStrategy> winningStrategies;
@@ -24,7 +24,7 @@ public class Game {
         this.moves = new ArrayList<>();
         this.gameState = GameState.IN_PROGRESS;
         this.nextMovePlayerIndex = 0;
-        this.winnner = null;
+        this.winner = null;
         this.winningStrategies = winningStrategies;
         this.players = players;
         this.board = new Board(dimension);
@@ -59,11 +59,11 @@ public class Game {
     }
 
     public Player getWinnner() {
-        return winnner;
+        return winner;
     }
 
     public void setWinnner(Player winnner) {
-        this.winnner = winnner;
+        this.winner = winnner;
     }
 
     public GameState getGameState() {
@@ -126,21 +126,25 @@ public class Game {
             return botCount <= 1;
         }
 
-        private void validate() throws InvalidNumberOfPlayersException, InvalidBotCountException {
+        private void validate() throws InvalidNumberOfPlayersException, InvalidBotCountException, SameSymbolException {
             if (players.size() != dimension - 1) {
                 throw new InvalidNumberOfPlayersException("Number of players should be 1 less than the dimension");
             }
-
             //validate if all the players have different symbols or not.
-            //TODO
-
+            Set<Character> symbols = new HashSet<>();
+            for (Player player : players) {
+                symbols.add(player.getSymbol().getaChar());
+            }
+            if (symbols.size() != players.size()) {
+                throw new SameSymbolException("All players must have different symbols");
+            }
             //validate number of bots in the game.
             if (!validateBotCount()) {
                 throw new InvalidBotCountException("Bot count should be <= 1");
             }
         }
 
-        public Game build() throws InvalidBotCountException, InvalidNumberOfPlayersException {
+        public Game build() throws InvalidBotCountException, InvalidNumberOfPlayersException, SameSymbolException {
             //validations
             validate();
 
@@ -185,7 +189,7 @@ public class Game {
 
         if (checkWinner(board, finalMove)) {
             gameState = GameState.ENDED;
-            winnner = currentPlayer;
+            winner = currentPlayer;
         } else if (moves.size() == board.getSize() * board.getSize()) {
             gameState = GameState.DRAW;
         }
